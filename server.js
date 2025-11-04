@@ -5,27 +5,34 @@ const apiKey = '7452b20bcd78b372c5fd56d46266531e';
 
 app.use(express.static("frontend/public"));
 
-app.get("/api/geocode", async (query) => {
+app.get("/api/weather", async (req, res) => {
+    const locationQuery = req.query.location;
+    const geoQuery = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${locationQuery}&limit=1&appid=${apiKey}`);
 
-    try {
-        const locationQuery = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=1&appid=${apiKey}`);
-        const locationResult = await locationQuery.json();
-        
-    } catch(err) {
-        response.status(500).json({error: "Failed to fetch location data"});
+    if (!geoQuery.ok) {
+        console.log(`HTTP ${geoQuery.status}: ${geoQuery.statusText}`);
     }
-    const {lat, lon} = locationResult[0];
+    const geoResponse = await geoQuery.json();
 
-    // getConditionsFromCoords(lat, lon);
+    if (!Array.isArray(geoResponse) || geoResponse.length === 0) {
+        return res.status(404).json({error: 'No location found'});
+    }
+
+    const {lat, lon, name, state, country} = geoResponse[0];
+    const displayName = [name, state, country].filter(Boolean).join(', ');
+
+    const conditionsQuery = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,alerts&appid=${apiKey}`);
+    const conditionsResponse = await conditionsQuery.json();
+
+    if (!conditionsResponse.ok) {
+        console.log(`HTTP ${conditionsResponse.status}: ${conditionsResponse.statusText}`);
+    }
+
+    res.json({
+        location: displayName,
+        coordinates: {lat, lon},
+        conditions: conditionsResponse.current,
+    });
 });
-
-async function getConditionsFromCoords(lat, lon) {
-    try {
-        const queryResponse = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,alerts&appid=${apiKey}`);
-        const conditionData = await queryResponse.json();
-    } catch (err) {
-        response.status(500).json({error: "Failed to fetch weather data"});
-    }
-}
 
 app.listen(3000, () => console.log('App is listening on port 3000'));
