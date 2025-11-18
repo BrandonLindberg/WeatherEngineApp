@@ -32,6 +32,8 @@ app.get("/api/weather", async (req, res) => {
         location: displayName,
         coordinates: {lat, lon},
         conditions: conditionsResponse.current,
+        hourly: conditionsResponse.hourly,
+        daily: conditionsResponse.daily,
     });
 });
 

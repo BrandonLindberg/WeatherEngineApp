@@ -4,5 +4,9 @@ window.onload = function callAPI() {
 
     fetch(`http://localhost:3000/api/weather?location=${formattedQuery}`)
         .then(res => res.json())
-        .then(data => console.log(data));
+        .then(data => {
+            console.log(data);
+            window.weatherData = data;
+            document.dispatchEvent(new CustomEvent('weatherDataReady', {detail: data}));
+        });
 }
