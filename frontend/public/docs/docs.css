@@ -60,16 +60,20 @@ main {
 /* Footer */
 
 footer {
-    display: flex;
-    justify-content: left;
-    align-items: center;
     font-family: var(--paragraph-font);
     color: white;
     background-color: var(--secondary-color);
 }
 
 #footerContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin: 0 0 0 20px;
+}
+
+#versionText{
+    justify-self: end;
+    margin-right: 20px;
 }
 
 /* Variables */

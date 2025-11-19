@@ -72,7 +72,8 @@ main {
     width: 500px;
     height: 300px;
     padding: 10px;
-    border: 1px solid black;
+    border: 3px solid #707070;
+    box-shadow: 5px 5px 8px #2b2b2b;
     border-radius: 10px;
     background-color: lightgrey;
     margin-bottom: 50px;
@@ -98,16 +99,20 @@ main {
 /* Footer */
 
 footer {
-    display: flex;
-    justify-content: left;
-    align-items: center;
     font-family: var(--paragraph-font);
     color: white;
     background-color: var(--secondary-color);
 }
 
 #footerContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin: 0 0 0 20px;
+}
+
+#versionText{
+    justify-self: end;
+    margin-right: 20px;
 }
 
 /* Variables */
