@@ -15,7 +15,15 @@ body {
 /* Header */
 
 header {
+    position: fixed;
+    min-width: 100%;
+    z-index: 100;
     font-family: var(--header-font);
+    top: 0;
+}
+
+header img {
+    width: 200px;
 }
 
 #mainHeader {
@@ -23,6 +31,7 @@ header {
     background-color: var(--secondary-color);
     border-bottom: 5px var(--primary-color) solid;
     width: 100%;
+    height: 100%;
 }
 
 #headerLinkHolder {
@@ -55,7 +64,7 @@ main {
     align-items: center;
     font-family: var(--paragraph-font);
     flex-grow: 1;
-    margin: 0;
+    margin: 200px 0 0 0;
 }
 
 #content {
@@ -69,7 +78,7 @@ main {
 #searchArea {
     color: white;
     text-align: center;
-    margin-bottom: 75px;
+    margin-bottom: 150px;
 }
 
 #searchBoxLabel {
