@@ -7,7 +7,6 @@ app.use(express.static("frontend/public"));
 app.use(cors());
 
 const apiKey = process.env.OPENWEATHER_API_KEY;
-// const localURL = process.env.LOCAL_API_URL;
 
 app.get("/api/weather", async (req, res) => {
     const locationQuery = req.query.location;
