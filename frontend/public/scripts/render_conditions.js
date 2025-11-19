@@ -1,5 +1,3 @@
-const conditionBox = document.querySelector('#conditionsTab')
-
 document.addEventListener("weatherDataReady", (event) => {
     const data = event.detail;
     renderConditions(data);
@@ -7,7 +5,9 @@ document.addEventListener("weatherDataReady", (event) => {
 
 function renderConditions(data) {
     const conditionBox = document.querySelector('#conditionsTab')
+    const conditionHeader = document.querySelector('#conditionsHeader')
 
+    conditionHeader.innerHTML = `Current conditions for ${data.location}`
     conditionBox.innerHTML = `<div id="conditionDetails">
                         <h3>${data.conditions.weather[0].description}</h3>
                     </div>
