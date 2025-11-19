@@ -27,9 +27,9 @@ app.get("/api/weather", async (req, res) => {
     const conditionsQuery = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,alerts&appid=${apiKey}`);
     const conditionsResponse = await conditionsQuery.json();
 
-    if (!conditionsResponse.ok) {
-        console.log(`HTTP ${conditionsResponse.status}: ${conditionsResponse.statusText}`);
-    }
+    // if (!conditionsResponse.ok) {
+    //     console.log(`HTTP ${conditionsResponse.status}: ${conditionsResponse.statusText}`);
+    // }
 
     res.json({
         location: displayName,
