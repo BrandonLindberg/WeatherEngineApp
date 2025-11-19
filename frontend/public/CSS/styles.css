@@ -5,7 +5,10 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     background-color: #474747;
+    min-height: 100vh;
     margin: 0;
 }
 
@@ -49,11 +52,13 @@ a:hover {
 
 main {
     font-family: var(--paragraph-font);
-    min-height: 990px;
+    flex-grow: 1;
+    margin: 0;
 }
 
 #content {
     color: white;
+    width: 50%;
     text-align: center;
 }
 
@@ -62,7 +67,7 @@ main {
 #searchArea {
     color: white;
     text-align: center;
-    margin-bottom: 150px;
+    margin-bottom: 75px;
 }
 
 #searchBoxLabel {
@@ -168,6 +173,10 @@ footer {
     font-family: var(--paragraph-font);
     color: white;
     background-color: var(--secondary-color);
+    position: fixed;
+    z-index: 100;
+    min-width: 100%;
+    bottom: 0;
 }
 
 #footerContent {
