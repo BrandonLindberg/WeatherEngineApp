@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Lexend:wght@100..900&display=swap');
+
+html {
+    background-color: var(--secondary-color);
+}
+
+body {
+    background-color: #474747;
+    margin: 0;
+}
+
+/* Header */
+
+header {
+    font-family: var(--header-font);
+    margin-bottom: 100px;
+}
+
+#mainHeader {
+    text-align: center;
+    background-color: var(--secondary-color);
+    border-bottom: 5px var(--primary-color) solid;
+    width: 100%;
+}
+
+#headerLinkHolder {
+    margin: 10px 20px;
+}
+
+.headerLink {
+    padding: 5px;
+}
+
+/* Header Links */
+
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited {
+    color: white;
+}
+
+a:hover {
+    color: #D5573B;
+}
+
+/* Main */
+
+main {
+    font-family: var(--paragraph-font);
+    height: 990px;
+}
+
+#content {
+    color: white;
+    text-align: center;
+}
+
+/* Footer */
+
+footer {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-family: var(--paragraph-font);
+    color: white;
+    background-color: var(--secondary-color);
+}
+
+#footerContent {
+    margin: 0 0 0 20px;
+}
+
+/* Variables */
+
+:root {
+    --header-font: 'Lexend';
+    --paragraph-font: 'Funnel Sans';
+
+    --primary-color: #0873EE;
+    --secondary-color: #0F0A15;
+}
+
+@media screen and (min-width: 900px){
+    #extremeTabHolder {
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+}
