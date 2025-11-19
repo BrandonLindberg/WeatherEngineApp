@@ -23,8 +23,7 @@ header {
 }
 
 header img {
-    width: 200px;
-    height: 85px;
+    max-width: 100%;
 }
 
 #mainHeader {
@@ -71,7 +70,15 @@ main {
 #content {
     color: white;
     width: 50%;
-    text-align: center;
+    text-align: left;
+}
+
+.contentGroup {
+    margin-top: 50px;
+}
+
+.contentP {
+    text-indent: 1em;
 }
 
 /* Search Box */
