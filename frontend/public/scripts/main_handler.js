@@ -9,7 +9,7 @@ let timeout;
 
 inputField.addEventListener("input", () => {
     clearTimeout(timeout);
-    timeout = setTimeout(fetchSuggestions, 100);
+    timeout = setTimeout(fetchSuggestions, 150);
 });
 
 inputField.addEventListener("change", () => {
