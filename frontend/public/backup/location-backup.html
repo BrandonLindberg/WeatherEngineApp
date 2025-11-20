@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="../CSS/styles.css">
     <link rel="preload" as="image" href="../images/weather_logo_white.png">
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-    <script src="../scripts/main_handler.js" defer></script>
+    <script src="../scripts/render_conditions.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../scripts/render_conditions.js"></script>
     <script src="../scripts/weather_charts.js"></script>
+    <script src="../scripts/api_call.js" defer></script>
 </head>
 <body>
     <header>
@@ -18,26 +18,12 @@
             <img src="../images/weather_logo_white.png" width="200px" height="85px" alt="">
         </div>
         <div id="headerLinkHolder">
-            <a class="headerLink" href="#">Home</a>
+            <a class="headerLink" href="../main_page/main.html">Home</a>
             <a class="headerLink" href="../docs/about.html">About</a>
             <a class="headerLink" href="../docs/help.html">Help</a>
         </div>
     </header>
     <main>
-        <div id="searchArea">
-            <!-- <form action="../location_page/location.html" method="get">
-                <label id="searchBoxLabel" for="searchBox"><h3>Search for a location:</h3></label>
-                <input id="searchBox" list="autofillBox" type="text" autocomplete="off" placeholder="Enter location" name="locationQuery" required>
-                <datalist id="autofillBox">
-                </datalist>
-                <button id="searchButton" type="submit">Search</button>
-            </form> -->
-            <label id="searchBoxLabel" for="searchBox"><h3>Search for a location:</h3></label>
-            <input id="searchBox" list="autofillBox" type="text" autocomplete="off" placeholder="Enter location" name="locationQuery">
-            <datalist id="autofillBox">
-            </datalist>
-            <button id="searchButton" type="submit">Search</button>
-        </div>
         <div id="conditionSection">
             <section class="conditionsBoxHolder">
                 <h3 id="conditionsHeader"></h3>

@@ -15,8 +15,8 @@ document.addEventListener("weatherDataReady", (event) => {
 
 // render the weather charts
 function renderForecastGraph(data) {
-    const hourlyTempArray = data.hourly.slice(0, 12);
-    const dailyTemps = data.daily.slice(0, 7);
+    const hourlyTempArray = data?.hourly.slice(0, 12);
+    const dailyTemps = data?.daily.slice(0, 7);
 
     const hours = Array.from({length: 12}, (_, index) => index + 1);
     const hourlyTemps = hourlyTempArray.map(temps => temps.temp);

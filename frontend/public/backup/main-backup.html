@@ -8,9 +8,6 @@
     <link rel="preload" as="image" href="../images/weather_logo_white.png">
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <script src="../scripts/main_handler.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../scripts/render_conditions.js"></script>
-    <script src="../scripts/weather_charts.js"></script>
 </head>
 <body>
     <header>
@@ -38,33 +35,16 @@
             </datalist>
             <button id="searchButton" type="submit">Search</button>
         </div>
-        <div id="conditionSection">
-            <section class="conditionsBoxHolder">
-                <h3 id="conditionsHeader"></h3>
-                <div id="conditionsTab" class="conditionBox">
-                    <!-- <div id="conditionDetails" class="conditionGridContent">
-                        <h3>Conditions</h3>
-                    </div>
-                    <div id="tempDetails" class="conditionGridContent">
-                        <h4>Temperature: 45 F</h4>
-                        <h4>Feels Like: 42 F</h4>
-                    </div>
-                    <div id="humidityDetails" class="conditionGridContent">
-                        <h4>Humidity: 70%</h4>
-                        <h4>Dew Point: 45 F</h4>
-                    </div>
-                    <div id="windDetails" class="conditionGridContent">
-                        <h4>Wind Speed: 8 mph</h4>
-                        <h4>Wind Direction: 300</h4>
-                    </div> -->
+        <div id="extremeSection">
+            <h3><i>Current Extremes:</i></h3>
+            <section id="extremeTabHolder">
+                <div class="extremeTab">
+                    <h4>Hottest Location</h4>
+                    <h1>WIP</h1>
                 </div>
-                <h3>Temperature Forecast for Next 12 Hours</h3>
-                <div class="conditionBox">
-                    <canvas id="forecastHourlyGraph"></canvas>
-                </div>
-                <h3>Temperature Forecast for Next 6 Days</h3>
-                <div class="conditionBox">
-                    <canvas id="forecastDailyGraph"></canvas>
+                <div class="extremeTab">
+                    <h4>Coldest Location</h4>
+                    <h1>WIP</h1>
                 </div>
             </section>
         </div>
