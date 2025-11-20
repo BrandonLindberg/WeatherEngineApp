@@ -1,18 +1,18 @@
 const degreeSymbol = 'F';
 
-document.addEventListener("weatherDataReady", (event) => {
-    const data = event.detail;
-    renderConditions(data);
-});
+// document.addEventListener("weatherDataReady", (event) => {
+//     const data = event.detail;
+//     renderConditions(data);
+// });
 
-function renderConditions(data) {
+export function renderConditions(data, name) {
     const conditionBox = document.querySelector('#conditionsTab')
     const conditionHeader = document.querySelector('#conditionsHeader')
 
     conditionHeader.innerHTML = '';
     conditionBox.innerHTML = '';
 
-    conditionHeader.innerHTML = `Current conditions for ${locationName}`;
+    conditionHeader.innerHTML = `Current conditions for ${name}`;
     conditionBox.innerHTML = `<div id="conditionDetails">
                         <h3>${data.conditions.weather[0].description}</h3>
                     </div>

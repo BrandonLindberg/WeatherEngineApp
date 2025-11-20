@@ -11,11 +11,10 @@ for (let i = 0; i < 7; i++) {
 }
 
 // get data from API call
-document.addEventListener("weatherDataReady", (event) => {
-
-    const data = event.detail;
+export function renderGraphs(data) {
 
     const renderForecastGraph = (data) => {
+        
         const hourlyTempArray = data?.hourly.slice(0, 12);
         const dailyTemps = data?.daily.slice(0, 7);
 
@@ -25,7 +24,7 @@ document.addEventListener("weatherDataReady", (event) => {
         const dailyTempMax = dailyTemps.map(dailyTemp => dailyTemp.temp.max);
         const dailyTempMin = dailyTemps.map(dailyTemps => dailyTemps.temp.min);
 
-        hourlyChart = new Chart( hourGraph,
+        const hourlyChart = new Chart( hourGraph,
             {
                 type: 'line',
                 data: {
@@ -54,7 +53,7 @@ document.addEventListener("weatherDataReady", (event) => {
                 }
             });
 
-        dailyChart = new Chart(dayGraph,
+        const dailyChart = new Chart(dayGraph,
                 {
                 type: 'line',
                 data: {
@@ -86,15 +85,10 @@ document.addEventListener("weatherDataReady", (event) => {
                     }
                 }
             });
-
-            button.addEventListener("click", () => {
-                chartDelete();
-            });
-
-            const chartDelete = () => {
-                hourlyChart.destroy();
-                dailyChart.destroy();
-            }
+        }
+        const chartDelete = () => {
+            hourlyChart.destroy();
+            dailyChart.destroy();
         }
         renderForecastGraph(data);
-});
+}

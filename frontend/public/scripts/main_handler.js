@@ -1,3 +1,7 @@
+import { updateVersion } from "./version_checker.js";
+import { renderConditions } from "./render_conditions.js";
+import { renderGraphs } from "./weather_charts.js";
+
 const inputField = document.getElementById('searchBox');
 const autofillContainer = document.getElementById('autofillBox');
 const button = document.getElementById('searchButton');
@@ -68,8 +72,16 @@ function checkStrings() {
         });
 }
 
+document.addEventListener("weatherDataReady", (event) => {
+    const data = event.detail;
+    renderConditions(data, locationName);
+    renderGraphs(data);
+});
+
 button.addEventListener("click", () => {
     if (inputField.value !== '') {
         checkStrings();
     }
 });
+
+updateVersion();
