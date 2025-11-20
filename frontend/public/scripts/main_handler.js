@@ -5,6 +5,8 @@ const button = document.getElementById('searchButton');
 let inputString = '';
 let selectedArray = [];
 
+let locationName;
+
 let timeout;
 
 inputField.addEventListener("input", () => {
@@ -22,7 +24,7 @@ function fetchSuggestions(){
     autofillContainer.innerHTML = '';
 
     if(inputString !== ''){
-        fetch(`http://localhost:3000/api/location?location=${inputString}`)
+        fetch(`https://weather.snailroom.net/api/location?location=${inputString}`)
             .then(res => res.json())
             .then(data => {
                 updateAutofill(data);
@@ -47,26 +49,27 @@ function updateAutofill(data) {
             arrayHolder.push(name);
             arrayHolder.push(lat);
             arrayHolder.push(lon);
+            locationName = name;
             count++;
         }
     });
     selectedArray.push(arrayHolder[1]);
     selectedArray.push(arrayHolder[2]);
-    console.log(selectedArray[0]);
 }
 
 function checkStrings() {
     const preFormattedString = `lat=${(selectedArray[0])}&lon=${(selectedArray[1])}`;
     const formattedString = encodeURIComponent(preFormattedString);
 
-    fetch (`http://localhost:3000/api/weather?q=${formattedString}`)
+    fetch (`https://weather.snailroom.net/api/weather?q=${formattedString}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             document.dispatchEvent(new CustomEvent('weatherDataReady', {detail: data}));
         });
 }
 
 button.addEventListener("click", () => {
-    checkStrings();
+    if (inputField.value !== '') {
+        checkStrings();
+    }
 });
