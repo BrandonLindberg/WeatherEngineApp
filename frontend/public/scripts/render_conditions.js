@@ -12,7 +12,7 @@ export function renderConditions(data, name) {
     conditionHeader.innerHTML = '';
     conditionBox.innerHTML = '';
 
-    conditionHeader.innerHTML = `Current conditions for ${name}`;
+    conditionHeader.innerHTML = `Showing: ${name}`;
     conditionBox.innerHTML = `<div id="conditionDetails">
                         <h3>${data.conditions.weather[0].description}</h3>
                     </div>
