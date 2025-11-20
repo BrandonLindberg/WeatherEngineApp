@@ -32,34 +32,25 @@
             <button id="searchButton" type="submit">Search</button>
         </div>
         <div id="conditionSection">
-            <section class="conditionsBoxHolder">
-                <h3 id="conditionsHeader">Current conditions for </h3>
-                <div id="conditionsTab" class="conditionBox">
-                    <!-- <div id="conditionDetails" class="conditionGridContent">
-                        <h3>Conditions</h3>
+            <!-- <section class="conditionsBoxHolder"> -->
+                <div class="superHolder">
+                    <h3 id="conditionsHeader">Current conditions for </h3>
+                    <div id="conditionsTab" class="conditionBox">
                     </div>
-                    <div id="tempDetails" class="conditionGridContent">
-                        <h4>Temperature: 45 F</h4>
-                        <h4>Feels Like: 42 F</h4>
+                </div>
+                <div class="superHolder">
+                    <h3>Temperature Forecast for Next 12 Hours</h3>
+                    <div class="conditionBox">
+                        <canvas id="forecastHourlyGraph"></canvas>
                     </div>
-                    <div id="humidityDetails" class="conditionGridContent">
-                        <h4>Humidity: 70%</h4>
-                        <h4>Dew Point: 45 F</h4>
+                </div>
+                <div class="superHolder">
+                    <h3>Temperature Forecast for Next 6 Days</h3>
+                    <div class="conditionBox">
+                        <canvas id="forecastDailyGraph"></canvas>
                     </div>
-                    <div id="windDetails" class="conditionGridContent">
-                        <h4>Wind Speed: 8 mph</h4>
-                        <h4>Wind Direction: 300</h4>
-                    </div> -->
                 </div>
-                <h3>Temperature Forecast for Next 12 Hours</h3>
-                <div class="conditionBox">
-                    <canvas id="forecastHourlyGraph"></canvas>
-                </div>
-                <h3>Temperature Forecast for Next 6 Days</h3>
-                <div class="conditionBox">
-                    <canvas id="forecastDailyGraph"></canvas>
-                </div>
-            </section>
+            <!-- </section> -->
         </div>
     </main>
     <footer>

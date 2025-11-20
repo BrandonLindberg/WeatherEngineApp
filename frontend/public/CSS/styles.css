@@ -118,46 +118,25 @@ main {
 
 /* Cards Section */
 
-#extremeSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    /* margin-bottom: 150px; */
-}
-
-#extremeTabHolder {
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 25px;
-    color: black;
-}
-
-.extremeTab {
-    width: 450px;
-    height: 300px;
-    margin: 5px;
-    border: 3px solid #707070;
-    box-shadow: 5px 5px 8px #2b2b2b;
-    border-radius: 10px;
-    background-color: lightgrey;
-    text-align: center;
-}
-
 #conditionSection {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     color: white;
     margin-bottom: 150px;
+    gap: 25px;
 }
 
-#conditionsBoxHolder {
+/* #conditionsBoxHolder {
     display: grid;
     grid-template-columns: 1fr;
     justify-items: center;
     gap: 25px;
+} */
+
+.superHolder {
+    align-items: center;
+    flex-shrink: 2;
 }
 
 .conditionBox {
@@ -221,9 +200,6 @@ footer {
     --secondary-color: #0F0A15;
 }
 
-@media screen and (min-width: 900px){
-    #extremeTabHolder {
-        grid-template-columns: 1fr 1fr;
-        gap: 50px;
-    }
-}
+/* @media screen and (min-width: 900px){
+
+} */
