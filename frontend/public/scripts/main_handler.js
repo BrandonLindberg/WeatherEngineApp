@@ -81,10 +81,9 @@ document.addEventListener("weatherDataReady", (event) => {
 document.addEventListener('keypress', (event) => {
     if (event.key === 'Enter' && inputField.value !== '') {
         if (inputField === document.activeElement) {
-            button.click();
+            clearTimeout(timer2);
+            timer2 = setTimeout(button.click(), 50);
         }
-        // clearTimeout(timer2);
-        // timer2 = setTimeout(checkStrings, 50);
     }
 });
 
