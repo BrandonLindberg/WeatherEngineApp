@@ -15,7 +15,7 @@ let locationName;
 let timer1;
 let timer2;
 
-// const root = createRoot(document.getElementById('app'));
+// const root = createRoot(document.getElementById('root'));
 
 inputField.addEventListener("input", () => {
     autofillContainer.innerHTML = '';
