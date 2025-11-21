@@ -11,11 +11,13 @@ let selectedArray = [];
 
 let locationName;
 
-let timeout;
+let timer1;
+let timer2;
 
 inputField.addEventListener("input", () => {
-    clearTimeout(timeout);
-    timeout = setTimeout(fetchSuggestions, 150);
+    autofillContainer.innerHTML = '';
+    clearTimeout(timer1);
+    timer1 = setTimeout(fetchSuggestions, 50);
 });
 
 inputField.addEventListener("change", () => {
@@ -24,9 +26,7 @@ inputField.addEventListener("change", () => {
 
 function fetchSuggestions(){
     inputString = inputField.value;
-
     autofillContainer.innerHTML = '';
-
     if(inputString !== ''){
         fetch(`https://weather.snailroom.net/api/location?location=${inputString}`)
             .then(res => res.json())
@@ -76,6 +76,16 @@ document.addEventListener("weatherDataReady", (event) => {
     const data = event.detail;
     renderConditions(data, locationName);
     renderGraphs(data);
+});
+
+document.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter' && inputField.value !== '') {
+        if (inputField === document.activeElement) {
+            button.click();
+        }
+        // clearTimeout(timer2);
+        // timer2 = setTimeout(checkStrings, 50);
+    }
 });
 
 button.addEventListener("click", () => {
