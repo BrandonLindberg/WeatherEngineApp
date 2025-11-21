@@ -31,7 +31,7 @@ function fetchSuggestions(){
     inputString = inputField.value;
     autofillContainer.innerHTML = '';
     if(inputString !== ''){
-        fetch(`https://weather.snailroom.net/api/location?location=${inputString}`)
+        fetch(`http://localhost:5173//api/location?location=${inputString}`)
             .then(res => res.json())
             .then(data => {
                 updateAutofill(data);
@@ -68,10 +68,11 @@ function checkStrings() {
     const preFormattedString = `lat=${(selectedArray[0])}&lon=${(selectedArray[1])}`;
     const formattedString = encodeURIComponent(preFormattedString);
 
-    fetch (`https://weather.snailroom.net/api/weather?q=${formattedString}`)
+    fetch (`http://localhost:5173//api/weather?q=${formattedString}`)
         .then(res => res.json())
         .then(data => {
             document.dispatchEvent(new CustomEvent('weatherDataReady', {detail: data}));
+            console.log(data)
         });
 }
 

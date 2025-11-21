@@ -3,7 +3,7 @@ const cors = require('cors');
 const app = express();
 require("dotenv").config();
 
-app.use(express.static("frontend/dist"));
+app.use(express.static("../frontend/dist"));
 app.use(cors());
 
 const geoKey = process.env.MAPBOX_DEV_KEY;
