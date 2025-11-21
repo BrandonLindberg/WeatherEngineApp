@@ -34,4 +34,4 @@ app.get("/api/location", async (req, res) => {
     });
 });
 
-app.listen(3000, () => console.log('App is listening on port'));
+app.listen(3000, () => console.log('App is listening on port 3000'));
