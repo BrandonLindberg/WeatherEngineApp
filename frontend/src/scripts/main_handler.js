@@ -14,79 +14,50 @@ let locationName;
 
 let timer1;
 let timer2;
+let count;
+
+let canEnter = true;
 
 // const root = createRoot(document.getElementById('root'));
 
 inputField.addEventListener("input", () => {
     autofillContainer.innerHTML = '';
-    clearTimeout(timer1);
-    timer1 = setTimeout(fetchSuggestions, 50);
+    dataQuery();
 });
 
 inputField.addEventListener("change", () => {
     inputString = selectedArray[0];
 });
 
-function fetchSuggestions(){
+function dataQuery() {
     inputString = inputField.value;
-    autofillContainer.innerHTML = '';
     if(inputString !== ''){
-        fetch(`https://weather.snailroom.net/api/location?location=${inputString}`)
-            .then(res => res.json())
-            .then(data => {
-                updateAutofill(data);
-        });
+        fetchSuggestions(inputString);
+        canEnter = false;
     }
-}
-
-function updateAutofill(data) {
-
-    let count = 0;
-    let arrayHolder = [];
-
-    selectedArray = [];
-
-    data.geoResult.features.forEach(feature => {
-        const name = [feature.properties.full_address];
-        const lat = [feature.properties.coordinates.latitude];
-        const lon = [feature.properties.coordinates.longitude];
-        autofillContainer.innerHTML += `<option value="${name}"></option>`;
-
-        if (count == 0) {
-            arrayHolder.push(name);
-            arrayHolder.push(lat);
-            arrayHolder.push(lon);
-            locationName = name;
-            count++;
-        }
-    });
-    selectedArray.push(arrayHolder[1]);
-    selectedArray.push(arrayHolder[2]);
+    autofillContainer.innerHTML = '';
 }
 
 function checkStrings() {
     const preFormattedString = `lat=${(selectedArray[0])}&lon=${(selectedArray[1])}`;
     const formattedString = encodeURIComponent(preFormattedString);
 
-    fetch (`https://weather.snailroom.net/api/weather?q=${formattedString}`)
+    fetch (`http://localhost:5173/api/weather?q=${formattedString}`)
         .then(res => res.json())
         .then(data => {
-            document.dispatchEvent(new CustomEvent('weatherDataReady', {detail: data}));
-            console.log(data)
-        });
+            sendData(data);
+    });
 }
 
-document.addEventListener("weatherDataReady", (event) => {
-    const data = event.detail;
+function sendData(data) {
     renderConditions(data, locationName);
     renderGraphs(data);
-});
+}
 
 document.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter' && inputField.value !== '') {
+    if (event.key === 'Enter' && canEnter === true) {
         if (inputField === document.activeElement) {
-            clearTimeout(timer2);
-            timer2 = setTimeout(button.click(), 50);
+            button.click();
         }
     }
 });
@@ -97,4 +68,39 @@ button.addEventListener("click", () => {
     }
 });
 
+async function fetchSuggestions(inputString) {
+    selectedArray = [];
+    const fetchQuery = await fetch(`http://localhost:5173/api/location?location=${inputString}`)
+    const fetchResult = await fetchQuery.json()
+
+    normalizeArray(fetchResult);
+}
+
+function normalizeArray(raw) {
+
+    let matchedArray = [];
+
+    count = 0;
+
+    raw.features.forEach(f => {
+        const name = f.properties.full_address ?? 'Unknown';
+        const lat = f.properties.coordinates.latitude ?? 'none';
+        const lon = f.properties.coordinates.longitude ?? 'none';
+        autofillContainer.innerHTML += `<option value="${name}"></option>`;
+        
+        if (count == 0) {
+            matchedArray.push(name, lat, lon);
+            console.log(matchedArray)
+            selectedArray = matchedArray.map(item => {
+                return;
+            });
+            // selectedArray.push(matchedArray[1]);
+            // selectedArray.push(matchedArray[2]);
+            console.log(selectedArray);
+            locationName = name;
+            count++;
+        }
+    });
+    canEnter = true;
+}
 updateVersion();

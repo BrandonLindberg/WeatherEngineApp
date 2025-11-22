@@ -6,6 +6,12 @@ require("dotenv").config();
 app.use(express.static("../frontend/dist"));
 app.use(cors());
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Content-Security-Policy", "default-src 'self'; style-src 'self' 'unsafe-inline';");
+    next();
+})
+
 const geoKey = process.env.MAPBOX_DEV_KEY;
 const apiKey = process.env.OPENWEATHER_API_KEY;
 
@@ -26,12 +32,10 @@ app.get("/api/weather", async (req, res) => {
 app.get("/api/location", async (req, res) => {
     const inputQuery = req.query.location;
 
-    const geoQuery = await fetch(`https://api.mapbox.com/search/geocode/v6/forward?q=${inputQuery}&access_token=${geoKey}`);
-    const geoResult = await geoQuery.json();
+    const gQuery = await fetch(`https://api.mapbox.com/search/geocode/v6/forward?q=${inputQuery}&access_token=${geoKey}`);
+    const gResult = await gQuery.json();
 
-    res.json({
-        geoResult,
-    });
+    res.json(gResult);
 });
 
 app.listen(3000, () => console.log('App is listening on port 3000'));

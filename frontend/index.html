@@ -3,10 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="
-     default-src * https://weather.snailroom.net;
-     script-src 'self' https://weather.snailroom.net;
-     ">
     <title>Weather Engine</title>
     <link rel="stylesheet" href="./src/styles/styles.css">
     <!-- <link rel="preload" as="image" href="../images/weather_logo_white.png"> -->
@@ -15,7 +11,7 @@
     <script type="module" src="./src/scripts/main_handler.js" defer></script>
 </head>
 <body>
-    <div id="root">
+    <!-- <div id="root"> -->
         <header>
         <div id="mainHeader">
             <img src="/images/weather_logo_white.png" width="200px" height="85px" alt="">
@@ -62,7 +58,7 @@
                     <canvas id="forecastDailyGraph"></canvas>
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
     </main>
     <footer>
         <div id="footerContent">
