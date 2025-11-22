@@ -31,7 +31,6 @@ app.get("/api/weather", async (req, res) => {
 
 app.get("/api/location", async (req, res) => {
     const inputQuery = req.query.location;
-
     const gQuery = await fetch(`https://api.mapbox.com/search/geocode/v6/forward?q=${inputQuery}&access_token=${geoKey}`);
     const gResult = await gQuery.json();
 

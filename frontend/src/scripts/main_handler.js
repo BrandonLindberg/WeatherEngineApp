@@ -3,17 +3,15 @@ import { updateVersion } from "./version_checker.js";
 import { renderConditions } from "./render_conditions.js";
 import { renderGraphs } from "./weather_charts.js";
 
-const inputField = document.getElementById('searchBox');
 const autofillContainer = document.getElementById('autofillBox');
+const inputField = document.getElementById('searchBox');
 const button = document.getElementById('searchButton');
 
 let inputString = '';
-let selectedArray = [];
-
+let locationArray = [];
 let locationName;
 
-let timer1;
-let timer2;
+let timeout;
 let count;
 
 let canEnter = true;
@@ -21,65 +19,47 @@ let canEnter = true;
 // const root = createRoot(document.getElementById('root'));
 
 inputField.addEventListener("input", () => {
-    autofillContainer.innerHTML = '';
-    dataQuery();
+    clearTimeout(timeout);
+    if (inputField.value !== '') {
+        timeout = setTimeout(dataQuery, 100);
+    }
 });
 
 inputField.addEventListener("change", () => {
-    inputString = selectedArray[0];
+    inputString = locationArray[0];
 });
 
-function dataQuery() {
-    inputString = inputField.value;
-    if(inputString !== ''){
-        fetchSuggestions(inputString);
-        canEnter = false;
-    }
-    autofillContainer.innerHTML = '';
-}
-
-function checkStrings() {
-    const preFormattedString = `lat=${(selectedArray[0])}&lon=${(selectedArray[1])}`;
-    const formattedString = encodeURIComponent(preFormattedString);
-
-    fetch (`http://localhost:5173/api/weather?q=${formattedString}`)
-        .then(res => res.json())
-        .then(data => {
-            sendData(data);
-    });
-}
-
-function sendData(data) {
-    renderConditions(data, locationName);
-    renderGraphs(data);
-}
-
 document.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter' && canEnter === true) {
-        if (inputField === document.activeElement) {
-            button.click();
-        }
+    if (event.key === 'Enter' && canEnter === true && inputField === document.activeElement) {
+        button.click();
     }
 });
 
 button.addEventListener("click", () => {
     if (inputField.value !== '') {
-        checkStrings();
+        fetchLocationQuery();
     }
 });
 
-async function fetchSuggestions(inputString) {
-    selectedArray = [];
-    const fetchQuery = await fetch(`http://localhost:5173/api/location?location=${inputString}`)
-    const fetchResult = await fetchQuery.json()
 
+function dataQuery() {
+    canEnter = false;
+    inputString = inputField.value;
+    fetchLocationMatches(inputString);
+}
+
+// fetch matches for current input
+async function fetchLocationMatches(query) {
+    locationArray = [];
+    const fetchQuery = await fetch(`http://localhost:4173/api/location?location=${query}`);
+    const fetchResult = await fetchQuery.json();
     normalizeArray(fetchResult);
 }
 
+// loop over each match returned and insert them into datelist; set location array to closest match
 function normalizeArray(raw) {
 
-    let matchedArray = [];
-
+    autofillContainer.innerHTML = '';
     count = 0;
 
     raw.features.forEach(f => {
@@ -89,18 +69,28 @@ function normalizeArray(raw) {
         autofillContainer.innerHTML += `<option value="${name}"></option>`;
         
         if (count == 0) {
-            matchedArray.push(name, lat, lon);
-            console.log(matchedArray)
-            selectedArray = matchedArray.map(item => {
-                return;
-            });
-            // selectedArray.push(matchedArray[1]);
-            // selectedArray.push(matchedArray[2]);
-            console.log(selectedArray);
-            locationName = name;
-            count++;
+            locationArray.push(name, lat, lon);
+            locationName = name; // fix this
         }
+        count++;
     });
     canEnter = true;
+}
+
+// get coords of current location match and send them to the server
+function fetchLocationQuery() {
+    const unencodedQuery = `lat=${(locationArray[1])}&lon=${(locationArray[2])}`;
+    const encodedQuery = encodeURIComponent(unencodedQuery);
+
+    fetch (`http://localhost:4173/api/weather?q=${encodedQuery}`)
+        .then(res => res.json())
+        .then(data => {
+            callRenderers(data);
+    });
+}
+
+function callRenderers(data) {
+    renderConditions(data, locationName);
+    renderGraphs(data);
 }
 updateVersion();
