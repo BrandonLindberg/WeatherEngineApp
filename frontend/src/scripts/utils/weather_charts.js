@@ -45,8 +45,6 @@ export function renderGraphs(data) {
     const hours = Array.from({length: 12}, (_, index) => index + 1);
 
     const hourlyTemps = hourlyArray.map(temps => temps.temp);
-
-    console.log(hourlyArray[1].rain["1h"]);
     
     hourlyRain = hourlyArray.map(hour => {
         const mm = hour.rain?.["1h"] ?? 0;
@@ -57,33 +55,36 @@ export function renderGraphs(data) {
     const dailyTempMin = dailyTemps.map(dailyTemps => dailyTemps.temp.min);
 
     rainChart = new Chart( rainGraph, 
-        {
-            type: 'bar',
-            data: {
-                labels: hours,
-                datasets: [{
-                    data: hourlyRain,
-                    backgroundColor: [
-                        'rgba(76, 45, 255, 0.2)',
-                    ],
-                    borderColor: [
-                        'rgba(0, 45, 170, 1)',
-                    ],
-                    borderWidth: 1
-                }]
+    {
+        type: 'bar',
+        data: {
+            labels: hours,
+            datasets: [{
+                data: hourlyRain,
+                backgroundColor: [
+                    'rgba(76, 45, 255, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(0, 45, 170, 1)',
+                ],
+                borderWidth: 1
+            }]
 
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
                 },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Hours from current'
+                tooltip: {
+                    enabled: false
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Hours from current'
                     }
                 }
             }
@@ -91,28 +92,31 @@ export function renderGraphs(data) {
     });
 
     hourlyChart = new Chart( hourGraph,
-        {
-            type: 'line',
-            data: {
-                labels: hours,
-                datasets: [{
-                    data: hourlyTemps,
-                    fill: false,
-                    borderColor: 'rgb(235, 196, 0)',
-                    tension: .5
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+    {
+        type: 'line',
+        data: {
+            labels: hours,
+            datasets: [{
+                data: hourlyTemps,
+                fill: false,
+                borderColor: 'rgb(235, 196, 0)',
+                tension: .5
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
                 },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Hours from current'
+                tooltip: {
+                    enabled: false
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Hours from current'
                     }
                 }
             }
@@ -120,33 +124,36 @@ export function renderGraphs(data) {
     });
 
     dailyChart = new Chart( dayGraph,
-            {
-            type: 'line',
-            data: {
-                labels: orderedDays,
-                datasets: [{
-                    label: 'Max',
-                    data: dailyTempMax,
-                    fill: false,
-                    borderColor: 'rgb(255, 136, 0)',
-                    tension: .2
-                },
-                {
-                    label: 'Min',
-                    data: dailyTempMin,
-                    fill: false,
-                    borderColor: 'rgb(0, 93, 255)',
-                    tension: .2
-                }]
+        {
+        type: 'line',
+        data: {
+            labels: orderedDays,
+            datasets: [{
+                label: 'Max',
+                data: dailyTempMax,
+                fill: false,
+                borderColor: 'rgb(255, 136, 0)',
+                tension: .2
             },
-            options: {
-                plugins: {
-                    legend: {
-                        display: true,
-                        labels: {
-                            boxWidth: 15,
-                            boxHeight: 1
+            {
+                label: 'Min',
+                data: dailyTempMin,
+                fill: false,
+                borderColor: 'rgb(0, 93, 255)',
+                tension: .2
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        boxWidth: 15,
+                        boxHeight: 1
                     }
+                },
+                tooltip: {
+                    enabled: false
                 }
             }
         }
