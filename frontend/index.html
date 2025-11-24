@@ -25,10 +25,12 @@
     <main>
         <div id="searchArea">
             <label id="searchBoxLabel" for="searchBox"><h3>Search for a location:</h3></label>
-            <input id="searchBox" list="autofillBox" type="text" autocomplete="off" placeholder="Enter location" name="locationQuery">
-            <datalist id="autofillBox">
-            </datalist>
-            <button id="searchButton" type="submit">Search</button>
+            <div id="searchBoxHolder">
+                <input id="searchBox" list="autofillBox" type="text" autocomplete="off" placeholder="Enter location" name="locationQuery">
+                <datalist id="autofillBox">
+                </datalist>
+                <button id="searchButton" type="submit">Search</button>
+            </div>
         </div>
         <div>
             <h2 id="conditionsHeader">location...</h2>
@@ -40,7 +42,7 @@
                 </div>
             </div>
             <div class="superHolder">
-                <h3>Precipitation</h3>
+                <h3>Precipitation (in)</h3>
                 <div class="conditionBox">
                     <canvas id="rainGraph"></canvas>
                 </div>

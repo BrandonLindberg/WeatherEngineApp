@@ -12,6 +12,8 @@ let rainChart;
 let hourlyChart;
 let dailyChart;
 
+let hourlyRain;
+
 // export function assignCanvas() {
 //     hourGraph = document.getElementById('forecastHourlyGraph');
 //     dayGraph = document.getElementById('forecastDailyGraph');
@@ -25,6 +27,10 @@ for (let i = 0; i < 7; i++) {
 // get data from API call
 export function renderGraphs(data) {
 
+    if (rainChart) {
+        rainChart.destroy()
+    }
+
     if (hourlyChart) {
         hourlyChart.destroy();
     }
@@ -36,35 +42,53 @@ export function renderGraphs(data) {
     const hourlyArray = data?.hourly.slice(0, 12);
     const dailyTemps = data?.daily.slice(0, 7);
 
-    console.log(data.hourly.weather);
-
     const hours = Array.from({length: 12}, (_, index) => index + 1);
 
     const hourlyTemps = hourlyArray.map(temps => temps.temp);
 
-    // const hourlyRain = hourlyArray.map(amount => amount.rain[0]);
+    console.log(hourlyArray[1].rain["1h"]);
+    
+    hourlyRain = hourlyArray.map(hour => {
+        const mm = hour.rain?.["1h"] ?? 0;
+        return mm / 25.4;
+    })
 
     const dailyTempMax = dailyTemps.map(dailyTemp => dailyTemp.temp.max);
     const dailyTempMin = dailyTemps.map(dailyTemps => dailyTemps.temp.min);
 
-    // rainChart = new Chart( rainGraph, 
-    //     {
-    //         type: 'bar',
-    //         data: {
-    //             labels: hours,
-    //             datasets: [{
-    //                 data: hourlyRain,
-    //                 backgroundColor: [
-    //                     'rgba(255, 99, 132, 0.2)',
-    //                 ],
-    //                 borderColor: [
-    //                     'rgba(255, 99, 132)',
-    //                 ],
-    //                 borderWidth: 1
-    //             }]
+    rainChart = new Chart( rainGraph, 
+        {
+            type: 'bar',
+            data: {
+                labels: hours,
+                datasets: [{
+                    data: hourlyRain,
+                    backgroundColor: [
+                        'rgba(76, 45, 255, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(0, 45, 170, 1)',
+                    ],
+                    borderWidth: 1
+                }]
 
-    //         }
-    // });
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Hours from current'
+                    }
+                }
+            }
+        }
+    });
 
     hourlyChart = new Chart( hourGraph,
         {
