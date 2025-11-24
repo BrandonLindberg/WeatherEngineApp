@@ -4,9 +4,11 @@ const todayIndex = new Date().getDay();
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const orderedDays = [];
 
+let rainGraph = document.getElementById('rainGraph');
 let hourGraph = document.getElementById('forecastHourlyGraph');
 let dayGraph = document.getElementById('forecastDailyGraph');
 
+let rainChart;
 let hourlyChart;
 let dailyChart;
 
@@ -31,14 +33,38 @@ export function renderGraphs(data) {
         dailyChart.destroy();
     }
 
-    const hourlyTempArray = data?.hourly.slice(0, 12);
+    const hourlyArray = data?.hourly.slice(0, 12);
     const dailyTemps = data?.daily.slice(0, 7);
 
+    console.log(data.hourly.weather);
+
     const hours = Array.from({length: 12}, (_, index) => index + 1);
-    const hourlyTemps = hourlyTempArray.map(temps => temps.temp);
+
+    const hourlyTemps = hourlyArray.map(temps => temps.temp);
+
+    // const hourlyRain = hourlyArray.map(amount => amount.rain[0]);
 
     const dailyTempMax = dailyTemps.map(dailyTemp => dailyTemp.temp.max);
     const dailyTempMin = dailyTemps.map(dailyTemps => dailyTemps.temp.min);
+
+    // rainChart = new Chart( rainGraph, 
+    //     {
+    //         type: 'bar',
+    //         data: {
+    //             labels: hours,
+    //             datasets: [{
+    //                 data: hourlyRain,
+    //                 backgroundColor: [
+    //                     'rgba(255, 99, 132, 0.2)',
+    //                 ],
+    //                 borderColor: [
+    //                     'rgba(255, 99, 132)',
+    //                 ],
+    //                 borderWidth: 1
+    //             }]
+
+    //         }
+    // });
 
     hourlyChart = new Chart( hourGraph,
         {

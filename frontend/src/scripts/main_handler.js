@@ -1,7 +1,9 @@
 // import { createRoot } from "react-dom/client";
-import { updateVersion } from "./version_checker.js";
-import { renderConditions } from "./render_conditions.js";
-import { renderGraphs } from "./weather_charts.js";
+import { updateVersion } from "./utils/version_checker.js";
+import { renderConditions } from "./utils/render_conditions.js";
+import { renderGraphs } from "./utils/weather_charts.js";
+
+const URL = import.meta.env.VITE_API_URL;
 
 const autofillContainer = document.getElementById('autofillBox');
 const inputField = document.getElementById('searchBox');
@@ -51,7 +53,7 @@ function dataQuery() {
 // fetch matches for current input
 async function fetchLocationMatches(query) {
     locationArray = [];
-    const fetchQuery = await fetch(`https://weather.snailroom.net/api/location?location=${query}`);
+    const fetchQuery = await fetch(`${URL}/api/location?location=${query}`);
     const fetchResult = await fetchQuery.json();
     normalizeArray(fetchResult);
 }
@@ -82,7 +84,7 @@ function fetchLocationQuery() {
     const unencodedQuery = `lat=${(locationArray[1])}&lon=${(locationArray[2])}`;
     const encodedQuery = encodeURIComponent(unencodedQuery);
 
-    fetch (`https://weather.snailroom.net/api/weather?q=${encodedQuery}`)
+    fetch (`${URL}/api/weather?q=${encodedQuery}`)
         .then(res => res.json())
         .then(data => {
             callRenderers(data);

@@ -37,4 +37,4 @@ app.get("/api/location", async (req, res) => {
     res.json(gResult);
 });
 
-app.listen(3000, () => console.log('App is listening on port 3000'));
+app.listen(3000, () => console.log('App is active on port 3000'));

@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Engine</title>
     <link rel="stylesheet" href="./src/styles/styles.css">
-    <!-- <link rel="preload" as="image" href="../images/weather_logo_white.png"> -->
     <link rel="icon" type="image/x-icon" href="/frontend/public/images/favicon.ico">
     <script type="module" src="./src/main.jsx"></script>
-    <!-- <script type="module" src="./src/scripts/main_handler.js" defer></script> -->
 </head>
 <body>
     <!-- <div id="root"> -->
@@ -20,8 +18,8 @@
         <div id="headerBanner2"></div>
         <div id="headerLinkHolder">
             <a class="headerLink" href="#">Dashboard</a>
-            <a class="headerLink" href="/frontend/public/docs/about.html">About</a>
-            <a class="headerLink" href="/frontend/public/docs/help.html">Help</a>
+            <a class="headerLink" href="#">About</a>
+            <a class="headerLink" href="#">Help</a>
         </div>
     </header>
     <main>
@@ -42,8 +40,9 @@
                 </div>
             </div>
             <div class="superHolder">
-                <h3>2nd</h3>
+                <h3>Precipitation</h3>
                 <div class="conditionBox">
+                    <canvas id="rainGraph"></canvas>
                 </div>
             </div>
             <div class="superHolder">
