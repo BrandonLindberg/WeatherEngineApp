@@ -51,7 +51,7 @@ function dataQuery() {
 // fetch matches for current input
 async function fetchLocationMatches(query) {
     locationArray = [];
-    const fetchQuery = await fetch(`http://localhost:4173/api/location?location=${query}`);
+    const fetchQuery = await fetch(`https://weather.snailroom.net/api/location?location=${query}`);
     const fetchResult = await fetchQuery.json();
     normalizeArray(fetchResult);
 }
@@ -82,7 +82,7 @@ function fetchLocationQuery() {
     const unencodedQuery = `lat=${(locationArray[1])}&lon=${(locationArray[2])}`;
     const encodedQuery = encodeURIComponent(unencodedQuery);
 
-    fetch (`http://localhost:4173/api/weather?q=${encodedQuery}`)
+    fetch (`https://weather.snailroom.net/api/weather?q=${encodedQuery}`)
         .then(res => res.json())
         .then(data => {
             callRenderers(data);
