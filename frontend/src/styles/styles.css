@@ -165,10 +165,6 @@ main {
     flex-shrink: 2;
 }
 
-canvas {
-    min-height: 100%;
-}
-
 .conditionBox {
     width: 500px;
     height: 300px;
