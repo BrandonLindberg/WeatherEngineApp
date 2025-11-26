@@ -1,9 +1,6 @@
-const degreeSymbol = 'F';
+import { getDirection } from "./direction_calculator.js";
 
-// document.addEventListener("weatherDataReady", (event) => {
-//     const data = event.detail;
-//     renderConditions(data);
-// });
+const degreeSymbol = 'F';
 
 export function renderConditions(data, name) {
     const conditionBox = document.querySelector('#conditionsTab')
@@ -11,6 +8,8 @@ export function renderConditions(data, name) {
 
     conditionHeader.innerHTML = '';
     conditionBox.innerHTML = '';
+
+    const direction = getDirection(data.conditions.wind_deg);
 
     conditionHeader.innerHTML = `Showing: ${name}`;
     conditionBox.innerHTML = `<div id="conditionDetails">
@@ -26,6 +25,6 @@ export function renderConditions(data, name) {
                     </div>
                     <div id="windDetails">
                         <h4>Wind Speed: ${Math.round(data.conditions.wind_speed)} mph</h4>
-                        <h4>Wind Direction: ${data.conditions.wind_deg}</h4>
+                        <h4>Wind Direction: ${data.conditions.wind_deg}&deg; ${direction}</h4>
                     </div>`
 }

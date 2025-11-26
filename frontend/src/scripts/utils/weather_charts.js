@@ -86,7 +86,12 @@ export function renderGraphs(data) {
                         display: true,
                         text: 'Hours from current'
                     }
-                }
+                },
+                y: {
+                    min: 0,
+                    max: 1
+                },
+                responsive: true
             }
         }
     });
