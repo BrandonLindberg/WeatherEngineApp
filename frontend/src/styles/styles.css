@@ -67,7 +67,7 @@ a:link, a:visited {
 }
 
 a:hover {
-    color: #D5573B;
+    color: #d5573b;
 }
 
 /* Main */
@@ -133,7 +133,11 @@ main {
 }
 
 #searchButton:hover {
-    background-color: #D5573B;
+    background-color: lightblue;
+}
+
+#locationButton {
+    margin-top: 15px;
 }
 
 /* Cards Section */
